@@ -40,7 +40,7 @@ if($fecha_seleccionada < date('Y-m-d', strtotime('+2 days'))) {
                 <select id="hora" name="hora" required>
                     <option value="">Selecciona</option>
                     <?php
-                    $horas = ['08:00','10:00','12:00','14:00','16:00','18:00','20:00'];
+                    $horas = ['09:00','11:00','12:00','14:00','16:00','18:00','20:00'];
                     foreach($horas as $h) {
                         // Verificar si la hora está ocupada para la cancha y fecha seleccionadas
                         $ocupada = false;
