@@ -61,7 +61,7 @@ try {
           </div>';
     exit;
 } catch(Exception $e) {
-    header("Location: disponibilidad.php?msg=Error al guardar la reserva");
+    header("Location: disponibilidad.php?msg=Errores al guardar la reserva");
     exit;
 }
 ?>
