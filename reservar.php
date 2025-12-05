@@ -2,7 +2,6 @@
 session_start();
 if(!isset($_SESSION['user_id'])) { header("Location: index.php"); exit; }
 require 'db.php';
-// Aceptar solo POST
 if($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: disponibilidad.php");
     exit;
@@ -18,7 +17,6 @@ if(!$fecha || !$hora || !$cancha) {
     exit;
 }
 
-// Validar formato de fecha y anticipación mínima 2 días
 try {
     $fecha_dt = new DateTime($fecha);
     $minima = new DateTime('+' . 2 . ' days');
@@ -33,10 +31,8 @@ try {
     exit;
 }
 
-// Normalizar hora a HH:MM:SS si viene sin segundos
 if(strlen($hora) <= 5) $hora = $hora . ':00';
 
-// Verificar si ya está ocupada
 $stmt = $pdo->prepare("SELECT COUNT(*) as cnt FROM reservas WHERE fecha = ? AND hora = ? AND cancha = ?");
 $stmt->execute([$fecha, $hora, $cancha]);
 $row = $stmt->fetch();
@@ -45,11 +41,9 @@ if($row && $row['cnt'] > 0) {
     exit;
 }
 
-// Reservar
 $stmt = $pdo->prepare("INSERT INTO reservas (usuario_id, cancha, fecha, hora) VALUES (?, ?, ?, ?)");
 try {
     $stmt->execute([$usuario_id, $cancha, $fecha, $hora]);
-    // Mostrar pantalla de confirmación y pago próximamente
     echo '<div style="font-family: Arial; text-align:center; padding:50px; background:#e0f7fa; min-height:100vh;">
             <div style="background:white; padding:40px; border-radius:20px; display:inline-block; box-shadow:0 10px 30px rgba(0,0,0,0.2);">
                 <h1 style="color:#00796b;">¡Reserva exitosa! 🎾</h1>

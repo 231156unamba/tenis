@@ -8,7 +8,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $telefono = trim($_POST['telefono']);
     $fecha_nac = $_POST['fecha_nacimiento'];
 
-    // Validar edad >= 18
     $hoy = new DateTime();
     $nacimiento = new DateTime($fecha_nac);
     $edad = $hoy->diff($nacimiento)->y;
@@ -17,7 +16,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    // Generar contraseña legible (8 caracteres alfanuméricos)
     $password_plana = substr(str_shuffle('ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789'), 0, 8);
     $hash = password_hash($password_plana, PASSWORD_DEFAULT);
 
@@ -25,7 +23,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = $pdo->prepare("INSERT INTO usuarios (nombre, apellido, email, telefono, password, fecha_nacimiento) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->execute([$nombre, $apellido, $email, $telefono, $hash, $fecha_nac]);
 
-        // ¡¡MOSTRAR LA CONTRASEÑA EN PANTALLA!!
         echo '<div style="font-family: Arial; text-align:center; padding:50px; background:#e0f7fa; min-height:100vh;">
                 <div style="background:white; padding:40px; border-radius:20px; display:inline-block; box-shadow:0 10px 30px rgba(0,0,0,0.2);">
                     <h1 style="color:#00796b;">¡Registro exitoso! 🎾</h1>

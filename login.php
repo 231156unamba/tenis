@@ -11,7 +11,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = $stmt->fetch();
 
     if($user) {
-        // Verificar si está bloqueado
         if($user['bloqueado_hasta'] && new DateTime() < new DateTime($user['bloqueado_hasta'])) {
             header("Location: index.php?msg=Cuenta bloqueada. Intenta en 5 minutos");
             exit;

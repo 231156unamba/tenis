@@ -1,7 +1,5 @@
 <?php
-// Cerrar sesión y redirigir al login
 session_start();
-// Limpiar todas las variables de sesión
 $_SESSION = [];
 if (ini_get("session.use_cookies")) {
 	$params = session_get_cookie_params();
