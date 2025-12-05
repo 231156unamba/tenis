@@ -37,7 +37,7 @@ $stmt = $pdo->prepare("SELECT COUNT(*) as cnt FROM reservas WHERE fecha = ? AND 
 $stmt->execute([$fecha, $hora, $cancha]);
 $row = $stmt->fetch();
 if($row && $row['cnt'] > 0) {
-    header("Location: disponibilidad.php?msg=Cancha ocupada en ese horario");
+    header("Location: disponibilidad.php?msg=No puedes reservar, la cancha está reservada");
     exit;
 }
 
