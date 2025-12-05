@@ -1,6 +1,6 @@
 @echo off
-REM Arranque rápido del servidor PHP embebido
-REM Requiere tener PHP instalado y agregado al PATH
+REM 
+REM 
 cd /d %~dp0
 php -S localhost:8080
 pause
